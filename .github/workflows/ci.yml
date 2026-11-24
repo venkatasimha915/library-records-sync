@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - run: pip install -r requirements-dev.txt
+      - name: Lint
+        run: ruff check .
+      - name: Tests (SQLite)
+        run: pytest -q
+
+  postgres-tests:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: records_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - run: pip install -r requirements-dev.txt
+      - name: Tests (PostgreSQL)
+        env:
+          TEST_DATABASE_URL: postgresql+psycopg://postgres:postgres@localhost:5432/records_test
+        run: pytest -q
+
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t library-records-sync .
+      - name: Smoke test
+        run: |
+          docker run -d --name app -p 8000:8000 -e DATABASE_URL=sqlite:////tmp/records.db library-records-sync
+          for i in $(seq 1 20); do curl -fs http://localhost:8000/health && break; sleep 1; done
+          curl -fs -X POST http://localhost:8000/api/sync | tee /dev/stderr | grep '"status":"success"'
+          curl -fs "http://localhost:8000/api/records?q=railroad" | grep -q "Railroad"
+
+  accessibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install app, Playwright and axe-core
+        run: |
+          pip install -r requirements.txt playwright==1.63.0
+          python -m playwright install --with-deps chromium
+          npm install --no-save axe-core@4.14.1
+      - name: Start the app
+        run: |
+          DATABASE_URL=sqlite:////tmp/a11y.db uvicorn app.main:app --port 8000 &
+          for i in $(seq 1 20); do curl -fs http://localhost:8000/health && break; sleep 1; done
+      - name: Run axe-core (WCAG 2.1 AA, light and dark mode)
+        run: python scripts/a11y_check.py http://localhost:8000 node_modules/axe-core/axe.min.js

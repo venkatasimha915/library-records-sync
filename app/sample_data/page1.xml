@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sample OAI-PMH ListRecords response (made-up records) used by the demo and tests. -->
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+  <responseDate>2026-11-20T14:00:00Z</responseDate>
+  <request verb="ListRecords" metadataPrefix="oai_dc">https://repository.example.edu/oai</request>
+  <ListRecords>
+    <record>
+      <header>
+        <identifier>oai:repository.example.edu:1001</identifier>
+        <datestamp>2026-11-18</datestamp>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <dc:title>Soil Moisture Readings from Central Illinois Research Farms, 2019-2024</dc:title>
+          <dc:creator>Alvarez, Maria</dc:creator>
+          <dc:creator>Chen, David</dc:creator>
+          <dc:subject>Agriculture</dc:subject>
+          <dc:subject>Soil science</dc:subject>
+          <dc:subject>Agriculture</dc:subject>
+          <dc:description>Hourly soil moisture readings collected at six research farm sites.</dc:description>
+          <dc:date>2025-03-14</dc:date>
+          <dc:type>Dataset</dc:type>
+          <dc:language>en</dc:language>
+          <dc:identifier>https://repository.example.edu/items/1001</dc:identifier>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:repository.example.edu:1002</identifier>
+        <datestamp>2026-11-18</datestamp>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <dc:title>Oral Histories of Champaign County Railroad Workers</dc:title>
+          <dc:creator>Johnson, Patricia</dc:creator>
+          <dc:subject>Oral history</dc:subject>
+          <dc:subject>Railroads</dc:subject>
+          <dc:description>Recorded interviews with retired railroad employees, with transcripts.</dc:description>
+          <dc:date>2023</dc:date>
+          <dc:type>Sound</dc:type>
+          <dc:language>en</dc:language>
+          <dc:identifier>https://repository.example.edu/items/1002</dc:identifier>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:repository.example.edu:1003</identifier>
+        <datestamp>2026-11-19</datestamp>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <dc:title>
+            Machine Learning Methods for Early Crop Disease Detection
+          </dc:title>
+          <dc:creator>Patel, Ravi</dc:creator>
+          <dc:subject>Machine learning</dc:subject>
+          <dc:subject>Plant pathology</dc:subject>
+          <dc:description>Master's thesis comparing image classification models on leaf photos.</dc:description>
+          <dc:date>2024-05-10</dc:date>
+          <dc:type>Thesis</dc:type>
+          <dc:language>en</dc:language>
+          <dc:identifier>https://repository.example.edu/items/1003</dc:identifier>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:repository.example.edu:1004</identifier>
+        <datestamp>2026-11-19</datestamp>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <!-- No title: this record should be rejected and logged, not imported. -->
+          <dc:creator>Unknown</dc:creator>
+          <dc:type>Text</dc:type>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <resumptionToken completeListSize="7" cursor="0">page2</resumptionToken>
+  </ListRecords>
+</OAI-PMH>

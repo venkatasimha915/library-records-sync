@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Second (last) page of the sample harvest. An empty resumptionToken means "no more pages". -->
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+  <responseDate>2026-11-20T14:00:02Z</responseDate>
+  <request verb="ListRecords" resumptionToken="page2">https://repository.example.edu/oai</request>
+  <ListRecords>
+    <record>
+      <header>
+        <identifier>oai:repository.example.edu:1005</identifier>
+        <datestamp>2026-11-19</datestamp>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <dc:title>Historic Campus Building Photographs</dc:title>
+          <dc:creator>University Archives</dc:creator>
+          <dc:subject>Architecture</dc:subject>
+          <dc:subject>University history</dc:subject>
+          <dc:description>Digitized photographs of campus buildings from 1900 to 1960.</dc:description>
+          <dc:date>1900/1960</dc:date>
+          <dc:type>Image</dc:type>
+          <dc:language>en</dc:language>
+          <dc:identifier>local-id-5531</dc:identifier>
+          <dc:identifier>https://repository.example.edu/items/1005</dc:identifier>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header>
+        <identifier>oai:repository.example.edu:1006</identifier>
+        <datestamp>2026-11-20</datestamp>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <dc:title>Guía de recursos bibliotecarios para estudiantes internacionales</dc:title>
+          <dc:creator>Ramírez, Lucía</dc:creator>
+          <dc:subject>Library instruction</dc:subject>
+          <dc:date>2026-08-01</dc:date>
+          <dc:type>Text</dc:type>
+          <dc:language>es</dc:language>
+          <dc:identifier>https://repository.example.edu/items/1006</dc:identifier>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+    <record>
+      <header status="deleted">
+        <identifier>oai:repository.example.edu:0999</identifier>
+        <datestamp>2026-11-20</datestamp>
+      </header>
+    </record>
+    <resumptionToken completeListSize="7" cursor="4"/>
+  </ListRecords>
+</OAI-PMH>
